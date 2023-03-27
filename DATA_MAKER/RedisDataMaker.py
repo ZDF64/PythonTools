@@ -21,6 +21,7 @@ def makeRedisData(size):
         redisU.hset(name = yyyyMMddHH+"_index",mapping = makeHashVinData(vinlist))
         for vin in vinlist:
             redisU.hset(name= yyyyMMddHH+"_"+vin,mapping = makeJson(vin,files));
+        redisU.close
         
     return 'Redis Data Make Finished';
 
@@ -86,7 +87,7 @@ def multiThreadTask(size):
     t4.start()
     t5.start()
     t6.start()
-    # 将 t1 和 t2 加入到主线程中
+    # 将 t1,t2,t3,t4,t5,t6 加入到主线程中
     t1.join()
     t2.join()
     t3.join()
